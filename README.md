@@ -1,24 +1,21 @@
-# README
+Install app:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Prepare -> install psql, create db user and etc.
 
-Things you may want to cover:
+```
+bundle
+rails db:create
+rails db:migrate
+```
 
-* Ruby version
+Create new user:
+```
+rails c
+User.create!(login: 'John', password: 'qwerty')
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Deposit user's bank account:
+```
+rails c
+CALL SERVICE
+```

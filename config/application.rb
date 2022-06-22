@@ -18,5 +18,10 @@ module SimpleBankingApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    Rails.logger                 = Logger.new(STDOUT)
+    Rails.logger.level           = Logger::DEBUG
+    Rails.logger.datetime_format = "%Y-%m-%d %H:%M:%S"
+    config.logger                = ActiveSupport::Logger.new("log/#{Rails.env}.log")
   end
 end
