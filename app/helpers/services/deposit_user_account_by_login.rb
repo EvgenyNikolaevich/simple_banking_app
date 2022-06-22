@@ -4,12 +4,12 @@ module Services
       new.call(**params)
     end
 
-    def call(params)
+    def call(params, logger = LoggerWrapper)
       valid_params = validate_params(params)
       account      = User.find_by!(login: valid_params[:login]).account
 
       deposit_account(account, valid_params[:amount])
-      log_transfer(valid_params)
+      logger.call(:debug, params, self.class)
     end
 
     private
@@ -23,10 +23,6 @@ module Services
 
     def deposit_account(account, amount)
       account.with_lock { account.increment!(:balance, amount) }
-    end
-
-    def log_transfer(params)
-      LoggerWrapper.call(:debug, params, self.class)
     end
   end
 end
